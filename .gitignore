@@ -1,0 +1,21 @@
+# Ignorar archivos temporales de Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignorar entorno virtual (comúnmente llamado venv, env, etc.)
+venv/
+env/
+.venv/
+.env/
+
+# Ignorar archivos de configuración del editor
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db
