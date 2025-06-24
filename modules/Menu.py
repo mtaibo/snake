@@ -1,65 +1,98 @@
-import readchar
-import re
-import os
+import curses
+from curses import wrapper
+
+import threading
+import time
 
 class Menu():
+    def __init__(self):
+        self.menu = ""
+        self.stdscr = None
+        self.key_pressed = None
 
-    def __init__(self) -> None:
-        self.args = {}
-        self.type = ''
-        self.name = ''
-        self.options = []
-        self.template = ''
+        self.longest_lines = []
+        self.available_options = []
 
-    def reload(self):
-        self.template = ''
-        for letter in self.args[1]['body']: 
-            if letter == '[':
-                self.type = 0 
-                break
-            else: self.type = 1
-        if self.type == 0: self.options = re.findall(r'\[(\w)\]', self.args[1]['body'])
-        hyphen = '-' * len(self.args[1]['head'])
-        self.template += '{}\n{}\n{}'.format(hyphen, self.args[1]['head'], hyphen)
-        self.template += '\n\n{}\n\n: '.format(self.args[1]['body'])
-    
-    def convert(self, args):
-        
-        lines = args.splitlines()
+        # Colors
+        self.COLOR_RED = None
 
-        head = lines.copy()
-        for n in head:
-            if n == '': head.remove(n)
-            elif n == '-' * len(lines[1]):
-                head = head[1]
-                break
+        # Measures
+        self.menu_height = 0
+        self.menu_width = 0
+        self.screen_center_y = 0
+        self.screen_center_x = 0
 
-        body = lines.copy()
-        body_string = ''
-        del body[0:5]
-        for n in range(0,len(body)):
-            if body[n] == ': ': break
-            elif body[n] == '' and body[n+1] == ': ' or body[n+1] == ':': break
-            elif body[n] != '' and body[n+1] != '': body_string += f'{body[n]}\n'
-            elif body[n] != '' and body[n+1] == '': body_string += f'{body[n]}\n\n'
-            elif body[n] == '': continue
-        body = body_string.rstrip('\n')
+    def deploy(self, menu):
+        self.menu = menu
+        wrapper(self.main)
 
-        self.args = [self.type, {'head': head, 'body': body}]
+    def main(self,stdscr):
 
-    def deploy(self, args):
-        self.convert(args)
-        self.reload()
+        self.stdscr = stdscr
+        self.unwrap_menu() # Prepare the self variables for the menu printing
 
         while True:
-            os.system('clear')
-            print(self.template, end='')
+            # Print the menu
+            stdscr.clear()
+            for index, line in enumerate(self.menu): stdscr.addstr(self.screen_center_y+index, self.screen_center_x, line)
 
-            if self.type == 0:
-                self.input = readchar.readchar()
-                if self.input.upper() not in self.options: continue
-                else: break
+            # Print the invalid key message
+            if self.key_pressed not in self.available_options and self.key_pressed != None:
+                self.warning_message('Invalid option!')
 
-            elif self.type == 1:
-                self.input = input()
-                break
+            stdscr.refresh()
+            
+            # Get the user input
+            self.key_pressed = stdscr.getch()
+
+            if self.key_pressed in self.available_options:
+                self.key_pressed = chr(self.key_pressed)
+                return
+            elif self.available_options == [] and self.key_pressed:
+                return
+
+    
+    def unwrap_menu(self):
+        self.menu = self.menu.split("\n")
+
+        # Get screen size
+        screen_height, screen_width = self.stdscr.getmaxyx()
+        # Get the menu size
+        self.menu_height = len(self.menu)
+        self.menu_width = max(len(line) for line in self.menu)
+        # Get the center of the screen
+        self.screen_center_y = (screen_height // 2) - (self.menu_height // 2)
+        self.screen_center_x = (screen_width // 2) - (self.menu_width // 2) # Longest line
+
+        # Get the index on the menu list of the longest lines
+        for i, line in enumerate(self.menu):
+            if '===' in line: self.longest_lines.append(i)
+        # Get the available options
+        number = 1
+        available_options = []
+        for i, line in enumerate(self.menu):
+            if len(line) > 1 and line[0] == str(number) and line[1] == ".": 
+                available_options.append(number)
+                number += 1
+        if len(available_options) > 0:
+            for n in range(len(available_options)): self.available_options.append(49+n)
+
+        # Set the colors
+        curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
+        self.COLOR_RED = curses.color_pair(1)
+
+    
+    def warning_message(self, message):
+
+        y, x = self.stdscr.getyx()
+        
+        def temporal_delete():
+            time.sleep(3)
+            self.stdscr.addstr(y+3,x-len(self.menu[-1]), " "*len(message))
+            self.stdscr.move(y, x)
+            self.stdscr.refresh()
+        
+        self.stdscr.addstr(y+3,x-len(self.menu[-1]), message, self.COLOR_RED | curses.A_BLINK)
+        threading.Thread(target=temporal_delete, daemon=True).start()
+
+        self.stdscr.move(y, x)

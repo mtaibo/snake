@@ -11,18 +11,18 @@ main_menu = r'''
 3. High Scores
 4. About
 5. Exit
-================================
+================================ 
 
 Select an option:'''
 
 settings_menu = r'''
 ========== SETTINGS ============
 
-1. Speed:      [Normal]  #  ← Lenta / Normal / Rápida
-2. Map Size:   [Medium]  #  ← Pequeño / Medio / Grande
-3. Wall Mode:  [On]      #  ← On (muere al chocar) / Off (atraviesa)
-4. Snake Char: [O]       #  ← O / # / * / @
-5. Colors:     [Default] #  ← Solo si usas `colorama` o similar
+1. Speed:      [Normal]
+2. Map Size:   [Medium]
+3. Wall Mode:  [On]
+4. Snake Char: [O]
+5. Colors:     [Default]
 6. Reset to Default
 7. Back to Main Menu
 
@@ -30,14 +30,20 @@ settings_menu = r'''
 
 Select an option:'''
 
+#  1. Lenta / Normal / Rápida
+#  2. Pequeño / Medio / Grande
+#  3. On (muere al chocar) / Off (atraviesa)
+#  4. O / # / * / @
+#  5. Solo si usas `colorama` o similar
+
 high_scores_menu = r'''
 ========== HIGH SCORES ============
 
-1. Alex     - 87
-2. Carla    - 74
-3. Diego    - 68
-4. Juan     - 65
-5. Maria    - 60
+1 . Alex     - 87
+2 . Carla    - 74
+3 . Diego    - 68
+4 . Juan     - 65
+5 . Maria    - 60
 
 ================================
 
