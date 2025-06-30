@@ -1,59 +1,47 @@
 import curses
-from curses import wrapper
-
 import threading
 import time
 
 class Menu():
-    def __init__(self):
+    def __init__(self, stdscr):
         self.menu = ""
-        self.stdscr = None
-        self.key_pressed = None
-
-        self.longest_lines = []
-        self.available_options = []
-
-        # Colors
-        self.COLOR_RED = None
-
-        # Measures
-        self.menu_height = 0
-        self.menu_width = 0
-        self.screen_center_y = 0
-        self.screen_center_x = 0
+        self.stdscr = stdscr
 
     def deploy(self, menu):
+
         self.menu = menu
-        wrapper(self.main)
-
-    def main(self,stdscr):
-
-        self.stdscr = stdscr
-        self.unwrap_menu() # Prepare the self variables for the menu printing
+        self.menu_setup() # Prepare the self variables for the menu printing
 
         while True:
             # Print the menu
-            stdscr.clear()
-            for index, line in enumerate(self.menu): stdscr.addstr(self.screen_center_y+index, self.screen_center_x, line)
+            self.stdscr.clear()
+            for index, line in enumerate(self.menu): self.stdscr.addstr(self.screen_center_y+index, self.screen_center_x, line)
 
             # Print the invalid key message
             if self.key_pressed not in self.available_options and self.key_pressed != None:
                 self.warning_message('Invalid option!')
 
-            stdscr.refresh()
+            self.stdscr.refresh()
             
             # Get the user input
-            self.key_pressed = stdscr.getch()
+            self.key_pressed = self.stdscr.getch()
 
             if self.key_pressed in self.available_options:
-                self.key_pressed = chr(self.key_pressed)
+                self.key_pressed = int(chr(self.key_pressed))
+                for index, line in enumerate(self.menu): self.stdscr.addstr(self.screen_center_y+index, self.screen_center_x, " "*len(line))
                 return
             elif self.available_options == [] and self.key_pressed:
+                for index, line in enumerate(self.menu): self.stdscr.addstr(self.screen_center_y+index, self.screen_center_x, " "*len(line))
                 return
 
     
-    def unwrap_menu(self):
+    def menu_setup(self):
         self.menu = self.menu.split("\n")
+
+        # Set empty variables
+        self.key_pressed = None
+        self.longest_lines = []
+        self.available_options = []
 
         # Get screen size
         screen_height, screen_width = self.stdscr.getmaxyx()
@@ -81,7 +69,11 @@ class Menu():
         curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
         self.COLOR_RED = curses.color_pair(1)
 
-    
+
+    def prepare_menu(self):
+        pass
+
+
     def warning_message(self, message):
 
         y, x = self.stdscr.getyx()
