@@ -19,3 +19,6 @@ env/
 # Ignorar archivos del sistema
 .DS_Store
 Thumbs.db
+
+# Ignorar archivos de guardado
+save.json
