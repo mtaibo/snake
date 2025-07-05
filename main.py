@@ -13,6 +13,9 @@ def main(stdscr):
     save = Save()
     menu = Menu(stdscr)
 
+    settings_menu = raw_settings_menu.format(*save.settings_format)
+    high_scores_menu = raw_high_scores_menu.format(save.high_scores_format)
+
     while True:
         menu.deploy(main_menu)
 
@@ -28,6 +31,7 @@ def main(stdscr):
             break
 
     save.save_file(save.file)
+
 
 if __name__ == "__main__":
     curses.wrapper(main)

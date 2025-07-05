@@ -15,13 +15,13 @@ main_menu = r'''
 
 Select an option:'''
 
-settings_menu = r'''
+raw_settings_menu = r'''
 ========== SETTINGS ============
 
-1. Speed:      [{}]
-2. Map Size:   [{}]
-3. Wall Mode:  [{}]
-4. Snake Char: [{}]
+1. Speed:             {}
+2. Map Size:          {}
+3. Wall Mode:         {}
+4. Snake Char:        {}
 5. Reset to Default
 6. Back to Main Menu
 
@@ -34,12 +34,12 @@ Select an option:'''
 #  3. [On] (muere al chocar) / Off (atraviesa)
 #  4. [O] / # / * / @
 
-high_scores_menu = r'''
+raw_high_scores_menu = r'''
 ========== HIGH SCORES ============
 
 {}
 
-================================
+===================================
 
 Press any key to go back to the main menu...'''
 
