@@ -1,6 +1,7 @@
-import curses
 import threading
+import curses
 import time
+
 
 class Menu():
     def __init__(self, stdscr):
@@ -68,10 +69,6 @@ class Menu():
         # Set the colors
         curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
         self.COLOR_RED = curses.color_pair(1)
-
-
-    def prepare_menu(self):
-        pass
 
 
     def warning_message(self, message):

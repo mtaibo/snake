@@ -18,12 +18,13 @@ Select an option:'''
 raw_settings_menu = r'''
 ========== SETTINGS ============
 
-1. Speed:             {}
-2. Map Size:          {}
-3. Wall Mode:         {}
-4. Snake Char:        {}
-5. Reset to Default
-6. Back to Main Menu
+1. Map Size:          {}
+2. Wall Mode:         {}
+3. Snake Char:        {}
+4. Snake Speed:       {}
+5. Controls:          {}
+6. Reset to Default
+7. Back to Main Menu
 
 ================================
 
@@ -33,6 +34,7 @@ Select an option:'''
 #  2. Pequeño / [Medio] / Grande
 #  3. [On] (muere al chocar) / Off (atraviesa)
 #  4. [O] / # / * / @
+#  5. ↑/←/↓/→ / [W/A/S/D]
 
 raw_high_scores_menu = r'''
 ========== HIGH SCORES ============
@@ -65,3 +67,30 @@ Version 1.0
 ================================
 
 Press any key to go back to the main menu...'''
+
+first_time_menu = r'''
+=========== GAME ==============
+
+First time?
+
+Controls:
+- W / A / S / D  → Move
+- Q              → Quit
+- P              → Pause
+
+Created by mtaibo
+Version 1.0
+
+================================
+
+Press any key to start the game...'''
+
+pause_menu = r'''
+=========== PAUSED =============
+
+1. Resume
+2. Quit to Main Menu
+
+================================
+
+Select an option:'''

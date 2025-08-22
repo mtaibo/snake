@@ -1,9 +1,22 @@
 DEFAULT_SAVE = {
-    "settings": {
-        "speed": "Normal",
+    'settings' : {
+        'map_height' : 20,
+        'map_width' : 40,
+        'map_characters' : {
+            'top_bottom' : '═',
+            'left_right' : '║',
+            'corner_left_top' : '╔',
+            'corner_right_top' : '╗',
+            'corner_left_bottom' : '╚',
+            'corner_right_bottom' : '╝',
+        }
+    },
+    "custom_settings": {
         "map_size": "Medio",
-        "wall_mode": "On",
+        "wall_collision_mode": "On",
         "snake_char": "@",
+        "snake_speed": "Normal",
+        "controls": "W/A/S/D"
     },
     "high_scores": [
         {
