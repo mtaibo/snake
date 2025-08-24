@@ -24,3 +24,6 @@ Comenzando con el diseño del juego en si, teniendo ya practicamente acabados lo
     · El módulo Map.py deberá imprimir un mapa en pantalla con un sistema de coordenadas suficientemente bueno como para acceder a él desde los modulos Snake.py o Object.py, y hacer que estos se muevan por el mapa simplemente devolviendo un cambio en la dirección de movimiento, y que el propio mapa gestione un movimiento continuo de la serpiente en un segundo thread dentro del archivo main.py.
 
         Es decir, lo primero es 
+
+
+

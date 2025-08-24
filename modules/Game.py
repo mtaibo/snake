@@ -7,6 +7,7 @@ from modules.Menu import Menu
 from templates.menus import *
 
 
+
 class Game():
     def __init__(self, stdscr, save):
 
@@ -18,15 +19,19 @@ class Game():
         self.menu = Menu(stdscr)
         #self.chronometer = Chronometer(stdscr)
 
-        self.grid = Grid(stdscr, save)
-        self.food = Food(stdscr, save)
-        self.snake = Snake(stdscr, save, self.grid, self.food)
+        self.food = Food(stdscr)
+        self.snake = Snake(stdscr)
+        self.grid = Grid(stdscr)
+
+        #self.snake.set(self.grid)
+        #self.food.set(self.grid)
 
 
     def start(self):
+        
+        self.grid.display()
 
         while True:
-            self.grid.display()
             #self.chronometer.display()
             #self.food.display()
             #self.snake.display()
@@ -40,11 +45,12 @@ class Game():
                 Pausar el ciclo del juego
                 '''
                 self.menu.deploy(pause_menu)
-                if self.menu.key_pressed == 1: continue
+                if self.menu.key_pressed == 1: self.grid.display()
                 elif self.menu.key_pressed == 2: return
             #elif self.key in self.snake.movement_keys:
             #    self.snake.move(self.key)
             #    self.food.check(self.snake.location)
+    
 
 
 '''

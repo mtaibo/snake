@@ -12,6 +12,8 @@ from modules.Game import *
 
 def main(stdscr):
 
+    curses.curs_set(0)
+
     save = Save()
     menu = Menu(stdscr)
     game = Game(stdscr, save)
