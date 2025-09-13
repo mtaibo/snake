@@ -1,4 +1,5 @@
-#from modules.submodules.Chronometer import Chronometer
+# Import game submodules
+from modules.submodules.Chronometer import Chronometer
 from modules.submodules.Grid import Grid
 from modules.submodules.Snake import Snake
 from modules.submodules.Food import Food
@@ -16,40 +17,57 @@ class Game():
 
         # Inicializar todas las partes del juego
 
+        self.chronometer = Chronometer(stdscr)
         self.menu = Menu(stdscr)
-        #self.chronometer = Chronometer(stdscr)
 
         self.food = Food(stdscr)
         self.snake = Snake(stdscr)
         self.grid = Grid(stdscr)
 
-        #self.snake.set(self.grid)
-        #self.food.set(self.grid)
+        if save.first_time: self.menu.deploy(first_time_menu)
+
+        self.set()
 
 
     def start(self):
         
-        self.grid.display()
-
         while True:
+            
+            self.grid.display()
+
             #self.chronometer.display()
             #self.food.display()
             #self.snake.display()
 
             self.key = self.stdscr.getch()
 
-            if self.key == ord('q'):
-                return
+            if self.key == ord('q'): return
+
             elif self.key == ord('p'):
                 '''
                 Pausar el ciclo del juego
                 '''
                 self.menu.deploy(pause_menu)
+
                 if self.menu.key_pressed == 1: self.grid.display()
                 elif self.menu.key_pressed == 2: return
+
             #elif self.key in self.snake.movement_keys:
             #    self.snake.move(self.key)
             #    self.food.check(self.snake.location)
+    
+    def set(self):
+        
+
+        '''
+        Esta función se encarga de, utilizando el guardado, establecer los parámetros
+        customizables dentro del juego, véase las dimensiones del grid, los caracteres
+        de la serpiente, la dificultad (velocidad de movimiento), etc.
+
+        Se encargará de pasarle estos parámetros a las clases correspondientes, pasando
+        una por una.
+        '''
+        
     
 
 

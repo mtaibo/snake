@@ -15,7 +15,7 @@ main_menu = r'''
 
 Select an option:'''
 
-raw_settings_menu = r'''
+settings_menu = r'''
 ========== SETTINGS ============
 
 1. Map Size:          {}
@@ -36,7 +36,7 @@ Select an option:'''
 #  4. [O] / # / * / @
 #  5. ↑/←/↓/→ / [W/A/S/D]
 
-raw_high_scores_menu = r'''
+high_scores_menu = r'''
 ========== HIGH SCORES ============
 
 {}

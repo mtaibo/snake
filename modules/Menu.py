@@ -4,9 +4,10 @@ import time
 
 
 class Menu():
-    def __init__(self, stdscr):
+    def __init__(self, stdscr, save=None):
         self.menu = ""
         self.stdscr = stdscr
+        self.save = save
 
     def deploy(self, menu):
 
@@ -37,6 +38,12 @@ class Menu():
 
     
     def menu_setup(self):
+
+        # Find if the menu has {} to format it with the save data
+        if '{}' in self.menu:
+            if 'settings' in self.menu.lower(): self.menu = self.menu.format(*self.save.settings_format)
+            elif 'high scores' in self.menu.lower(): self.menu = self.menu.format(self.save.high_scores_format)
+
         self.menu = self.menu.split("\n")
 
         # Set empty variables

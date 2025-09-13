@@ -4,8 +4,20 @@ import curses
 class Grid():
     def __init__(self, stdscr):
         self.stdscr = stdscr
+
+        # Customizable grid options
         self.height_percentage = 70
         self.width_percentage = 40
+
+        # Non customizable grid options
+        self.screen_height, self.screen_width = self.stdscr.getmaxyx()
+        self.height = round(self.screen_height * self.height_percentage/100) ### 24
+        self.width = round(self.screen_width * self.width_percentage/100) ### 48
+        self.screen_center_height = round((self.screen_height // 2) - (self.height // 2))
+        self.screen_center_width = round((self.screen_width // 2) - ((self.width) // 2))
+
+        # Controls and characters
+        self.controls = 'W/A/S/D'
         self.characters = {
             'top_bottom' : '═',
             'left_right' : '║',
@@ -14,14 +26,7 @@ class Grid():
             'corner_left_bottom' : '╚',
             'corner_right_bottom' : '╝',
         }
-        self.controls = 'W/A/S/D'
-        self.score = 0
-        self.screen_height, self.screen_width = self.stdscr.getmaxyx()
-        self.height = round(self.screen_height * self.height_percentage/100) ### 24
-        self.width = round(self.screen_width * self.width_percentage/100) ### 48
 
-        self.screen_center_height = round((self.screen_height // 2) - (self.height // 2))
-        self.screen_center_width = round((self.screen_width // 2) - ((self.width) // 2))
 
     def display(self):
         
