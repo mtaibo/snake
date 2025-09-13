@@ -1,5 +1,5 @@
 # Import game submodules
-from modules.submodules.Chronometer import Chronometer
+from modules.submodules.Chrono import Chrono
 from modules.submodules.Grid import Grid
 from modules.submodules.Snake import Snake
 from modules.submodules.Food import Food
@@ -17,7 +17,7 @@ class Game():
 
         # Inicializar todas las partes del juego
 
-        self.chronometer = Chronometer(stdscr)
+        self.chrono = Chrono(stdscr)
         self.menu = Menu(stdscr)
 
         self.food = Food(stdscr)
