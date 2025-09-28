@@ -20,7 +20,7 @@ class Menu():
             for index, line in enumerate(self.menu): self.stdscr.addstr(self.screen_center_y+index, self.screen_center_x, line)
 
             # Print the invalid key message
-            if self.key_pressed not in self.available_options and self.key_pressed != None:
+            if self.key_pressed not in self.available_options and self.key_pressed not in (None, -1):
                 self.warning_message('Invalid option!')
 
             self.stdscr.refresh()

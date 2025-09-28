@@ -26,16 +26,27 @@ class Game():
         self.food = Food(stdscr)
         self.snake = Snake(stdscr)
         self.grid = Grid(stdscr)
-
-        self.set() # Set game parameters from save
     
     def set(self):
         
         # Set grid dimensions at Snake
         self.snake.grid_height = self.grid.height
         self.snake.grid_width = self.grid.width
+        self.snake.height_corrector = self.grid.grid_top_left_corner_height
+        self.snake.width_corrector = self.grid.grid_top_left_corner_width
+        self.snake.location = {
+            'head' : [self.snake.grid_height//2, self.snake.grid_width//2],
+            'body' : [[self.snake.grid_height//2-1, self.snake.grid_width//2], 
+                      [self.snake.grid_height//2-2, self.snake.grid_width//2]]} 
+
+        # Set grid dimensions at Chrono
+        self.chrono.grid_top_right_corner_height = self.grid.grid_top_left_corner_height + self.grid.height
+        self.chrono.grid_top_right_corner_width = self.grid.grid_top_left_corner_width + self.grid.width
 
     def start(self):
+        
+        # Set game parameters to default
+        self.set()
 
         # First time menu 
         if self.save.first_time: self.menu.deploy(first_time_menu)
@@ -43,9 +54,10 @@ class Game():
         # Initialize game
         self.grid.countdown()
         self.chrono.start()
+        self.key = self.snake.direction
         
         # Main game loop
-        while True:
+        while self.snake.game_over == False:
             
             self.grid.display()
             self.food.display()
@@ -63,15 +75,16 @@ class Game():
                 self.chrono.pause()
                 self.menu.deploy(pause_menu)
 
-                if self.menu.key_pressed == 1: self.chrono.start() 
+                if self.menu.key_pressed == 1: 
+                    self.chrono.start()
+                    self.grid.countdown() 
                 elif self.menu.key_pressed == 2: return
 
-            # Movement controls
-            '''
-            elif self.key in self.snake.movement_keys:
-                self.snake.move(self.key)
-                self.food.check(self.snake.location)           
-            '''
+            # Snake movement control
+            elif self.key in self.snake.movement_keys and self.key != self.snake.direction:
+                self.snake.direction = self.key
+                self.snake.direction_changed = True
 
             # Game time control
-            time.sleep(0.1)
+            self.snake.move()       
+            time.sleep(0.3)

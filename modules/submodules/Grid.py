@@ -1,8 +1,10 @@
+# Import standard libraries
 import curses
 
 
 class Grid():
     def __init__(self, stdscr):
+
         self.stdscr = stdscr
 
         # Customizable grid options
@@ -11,8 +13,8 @@ class Grid():
 
         # Non customizable grid options
         self.screen_height, self.screen_width = self.stdscr.getmaxyx()
-        self.height = round(self.screen_height * self.height_percentage/100) ### 24
-        self.width = round(self.screen_width * self.width_percentage/100) ### 48
+        self.height = round(self.screen_height * self.height_percentage/100)
+        self.width = round(self.screen_width * self.width_percentage/100) 
         self.grid_top_left_corner_height = round((self.screen_height // 2) - (self.height // 2))
         self.grid_top_left_corner_width = round((self.screen_width // 2) - ((self.width) // 2))
 

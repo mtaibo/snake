@@ -1,6 +1,3 @@
-# Import interface library
-import curses
-
 # Import script modules
 from modules.Save import Save
 from modules.Menu import Menu
@@ -8,6 +5,9 @@ from modules.Game import Game
 
 # Import menu templates
 from templates.menus import *
+
+# Import standard libraries
+import curses
 
 
 def main(stdscr):
