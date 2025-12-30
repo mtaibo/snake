@@ -1,34 +1,112 @@
 import reflex as rx
-
 from rxconfig import config
+
+from snake.styles.styles import *
+from snake.styles.colors import * 
+
+from snake.components.left_panel import left_panel
+from snake.components.board_area import board_area
 
 
 class State(rx.State):
-    """The app state."""
+    panel_open: bool = True
+    score: int = 0
+    high: int = 12
+    status: str = "PAUSED"
+
+    def toggle_panel(self):
+        self.panel_open = not self.panel_open
 
 
-def index() -> rx.Component:
-    # Welcome Page (Index)
-    return rx.container(
-        rx.color_mode.button(position="top-right"),
+def index():
+    return rx.box(
         rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
-            rx.text(
-                "Get started by editing ",
-                rx.code(f"{config.app_name}/{config.app_name}.py"),
-                size="5",
+            # Header
+            rx.hstack(
+                rx.heading("SNAKE", size="9", weight="bold"),
+                rx.spacer(),
+                # Botón para reabrir el panel cuando está oculto
+                rx.cond(
+                    State.panel_open,
+                    rx.box(),  # nada cuando está abierto (ya tienes Hide dentro del panel)
+                    rx.button("Show controls", size="2", on_click=State.toggle_panel),
+                ),
+                rx.hstack(
+                    rx.vstack(
+                        rx.text("SCORE", opacity=0.7, font_size="12px"),
+                        rx.text(
+                            rx.cond(
+                                State.score < 10,
+                                "00" + State.score.to_string(),
+                                rx.cond(
+                                    State.score < 100,
+                                    "0" + State.score.to_string(),
+                                    State.score.to_string(),
+                                ),
+                            ),
+                            font_size="24px",
+                            weight="bold",
+                        ),
+                        spacing="1",
+                        align="end",
+                    ),
+                    rx.vstack(
+                        rx.text("HIGH", opacity=0.7, font_size="12px"),
+                        rx.text(
+                            rx.cond(
+                                State.score < 10,
+                                "00" + State.score.to_string(),
+                                rx.cond(
+                                    State.score < 100,
+                                    "0" + State.score.to_string(),
+                                    State.score.to_string(),
+                                ),
+                            ),
+                            font_size="24px",
+                            weight="bold",
+                        ),
+                        spacing="1",
+                        align="end",
+                    ),
+                    rx.badge(State.status, variant="solid"),
+                    spacing="6",
+                    align="center",
+                ),
+                width="100%",
+                align="center",
             ),
-            rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
+
+            # Main
+            rx.hstack(
+                # Panel izquierdo condicional
+                rx.cond(
+                    State.panel_open,
+                    left_panel(State),
+                    rx.box(width="0px"),  # placeholder (evita rarezas de layout)
+                ),
+
+                board_area(),
+                spacing="6",
+                width="100%",
+                align="start",
             ),
-            spacing="5",
-            justify="center",
-            min_height="85vh",
+
+            spacing="6",
+            width="100%",
         ),
+        min_height="100vh",
+        padding=["20px", "24px", "48px"],
+        background=BG,
+        color="white",
     )
 
 
-app = rx.App()
+app = rx.App(
+    head_components=[
+        rx.el.link(rel="icon", type="image/png", sizes="32x32", href="/favicon/favicon.png?v=1"),
+        rx.el.link(rel="apple-touch-icon", sizes="180x180", href="/favicon/apple-touch-icon.png?v=1"),
+        rx.el.link(rel="icon", href="/favicon/favicon.ico?v=1"),
+    ],
+)
+
 app.add_page(index, route="/", title="Snake")
