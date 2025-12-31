@@ -8,6 +8,7 @@
     "**/.web": true,
     "**/venv": true,
     "**/requirements.txt": true,
+    "**/.vscode": true,
   },
   "search.exclude": {
     "**/__pycache__": true,
@@ -17,5 +18,6 @@
     "**/.web": true,
     "**/venv": true,
     "**/requirements.txt": true,
+    "**/.vscode": true,
   }
 }
