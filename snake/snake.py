@@ -30,18 +30,24 @@ def index():
 
         rx.hstack(
             title(),
-            score(),
-            pause(),
+            rx.hstack(
+                score(),
+                pause(),
+                style=mid_column
+            ),
+            style=header
         ),
 
         # Page Content
 
         rx.hstack(
             left_sidebar(),
-            start(),
             game(), 
             right_sidebar(),
-        )
+            style=content
+        ),
+
+        style=body
     )
 
 
