@@ -17,17 +17,15 @@ from snake.components.game.start import start
 from snake.components.game.game import game
 
 
-
 class State(rx.State):
     pass
 
 
-def index():
+def index() -> rx.Component:
 
     return rx.vstack(
 
         # Header
-
         rx.hstack(
             title(),
             rx.hstack(
@@ -38,8 +36,7 @@ def index():
             style=header
         ),
 
-        # Page Content
-
+        # Content
         rx.hstack(
             left_sidebar(),
             game(), 
