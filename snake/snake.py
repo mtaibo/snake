@@ -102,11 +102,7 @@ def index():
 
 
 app = rx.App(
-    head_components=[
-        rx.el.link(rel="icon", type="image/png", sizes="32x32", href="/favicon/favicon.png?v=1"),
-        rx.el.link(rel="apple-touch-icon", sizes="180x180", href="/favicon/apple-touch-icon.png?v=1"),
-        rx.el.link(rel="icon", href="/favicon/favicon.ico?v=1"),
-    ],
+    head_components=head
 )
 
 app.add_page(index, route="/", title="Snake")
