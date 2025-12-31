@@ -2,11 +2,20 @@
   "files.exclude": {
     "**/__pycache__": true,
     "**/*.pyc": true,
-    "**/*.pyo": true
+    "**/*.pyo": true,
+    "**/__init__.py": true,
+    "**/.states": true,
+    "**/.web": true,
+    "**/venv": true,
+    "**/requirements.txt": true,
   },
   "search.exclude": {
     "**/__pycache__": true,
     "**/*.pyc": true,
-    "**/*.pyo": true
+    "**/*.pyo": true,
+    "**/.states": true,
+    "**/.web": true,
+    "**/venv": true,
+    "**/requirements.txt": true,
   }
 }
