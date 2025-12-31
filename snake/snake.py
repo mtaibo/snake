@@ -6,15 +6,15 @@ from snake.styles.styles import *
 from snake.styles.colors import * 
 
 # Header components
-from snake.components.title import title
-from snake.components.score import score
-from snake.components.pause import pause
+from snake.components.header.title import title
+from snake.components.header.score import score
+from snake.components.header.pause import pause
 
 # Page content components
-from snake.components.left_sidebar import left_sidebar
-from snake.components.right_sidebar import right_sidebar
-from snake.components.start import start
-from snake.components.game import game
+from snake.components.sidebars.left_sidebar import left_sidebar
+from snake.components.sidebars.right_sidebar import right_sidebar
+from snake.components.game.start import start
+from snake.components.game.game import game
 
 
 
