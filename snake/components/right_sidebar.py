@@ -3,7 +3,7 @@ import reflex as rx
 
 def right_sidebar() -> rx.Component:
 
-    return rx.rx.vstack(
+    return rx.vstack(
         rx.text('Leaderboard')
     )
 
