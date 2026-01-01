@@ -1,5 +1,5 @@
 import reflex as rx
-
+from reflex.event import KeyInputInfo
 
 class State(rx.State):
 
@@ -21,13 +21,27 @@ class State(rx.State):
     def start(self):
         self.game_status = 'playing'
 
-    def pause(self):
+    def pause_resume(self):
         if self.game_status == 'playing':
             self.game_status = 'paused'
-
-    def resume(self):
-        if self.game_status == 'paused':
+        elif self.game_status == 'paused':
             self.game_status = 'playing'
 
     def stop(self):
         self.game_status = 'stopped'
+
+
+    ## ! KEY DOWN HANDLER
+
+    def on_key_down(self, key: str, info: KeyInputInfo):
+            # Ejemplo: pausar con Space, reset con R
+            if key == " ":
+                if self.game_status == 'playing':
+                    self.game_status = 'paused'
+                elif self.game_status == 'paused':
+                    self.game_status = 'playing'
+                elif self.game_status == 'stopped':
+                    self.game_status = 'playing'
+
+            if key.lower() == 'r':
+                self.game_status = 'stopped'

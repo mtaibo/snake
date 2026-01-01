@@ -2,8 +2,10 @@ import reflex as rx
 from rxconfig import *
 from snake.state import State    
 
-# Style files
-from snake.styles.styles import *
+# Key listeners
+from reflex_global_hotkey import global_hotkey_watcher
+
+# Layout styles
 from snake.styles.layout import *
 
 # Header components
@@ -20,6 +22,9 @@ from snake.components.game.game import game
 def index() -> rx.Component:
 
     return rx.vstack(
+
+        # Key listener
+        global_hotkey_watcher(on_key_down=State.on_key_down),
 
         # Header
         rx.hstack(
@@ -39,6 +44,7 @@ def index() -> rx.Component:
             right_sidebar(),
             style=content_style
         ),
+
 
         style=base_style
     )

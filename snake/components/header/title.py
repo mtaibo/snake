@@ -1,6 +1,5 @@
 import reflex as rx
-from snake.styles.styles import title_style
-
+from snake.styles.components.header import title_style
 
 def title() -> rx.Component:
 

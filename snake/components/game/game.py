@@ -1,7 +1,8 @@
 import reflex as rx
-from snake.styles.styles import canvas_style, instructions_style
-from snake.components.game.start import start
+from snake.state import State
 
+from snake.styles.components.game import *
+from snake.components.game.start import start
 
 def game() -> rx.Component:
 

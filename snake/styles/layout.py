@@ -1,45 +1,29 @@
-
 from snake.styles.colors import *
+from snake.styles.mixins import *
+from snake.styles.measures import *
 
 
 base_style = {
     'background-color': PRIMARY,
-
     'width' : '100vw',
     'height' : '100vh',
+    'overflow' : 'hidden',
 }
 
 header_style = {
-    'width' : '100vw',
-    
+    'height' : '18.28vh',
+    **MAIN_COLUMNS_GRID,
     'padding-top' : '7.23vh',
     'padding-left' : '6.12vw',
     'padding-bottom' : '5.5vh',
-
-    'display' : 'grid',
-    'grid-template-columns' : '19vw 34vw 19vw',
-    'align-items' : 'center',
-    'column_gap' : '8.5vw',
-
-    'overflow' : 'hidden'
 }
 
 content_style = {
-    'width' : '100vw',
-    'height' : '1fr',
-
+    **MAIN_COLUMNS_GRID,
     'padding-left' : '6.12vw',
-
-    'display' : 'grid',
-    'grid-template-columns' : '19vw 34vw 19vw',
-    'align-items' : 'center',
-    'column_gap' : '8.5vw',
 }
 
-
 mid_header_style = {
-    'display' : 'flex',
-    'align-items' : 'center',
-    'justify-content' : 'center',
+    **FLEX_CENTER,
     'gap' : '90px',
 }
