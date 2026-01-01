@@ -3,13 +3,6 @@ from snake.styles.measures import *
 from snake.styles.mixins import * 
 from snake.styles.colors import *
 
-## ? HEADER COMPONENTS STYLES
-
-
-## ? CONTENT COMPONENTS STYLES
-
-# * Sidebar styles
-
 sidebar_shown_style = {
     'background-color' : SECONDARY,
 
