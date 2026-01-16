@@ -12,6 +12,7 @@ canvas_style = {
 }
 
 instructions_style = {
+    'width' : '100%',
     'font-size' : '15px',
     'font-weight' : '100', 
     'padding-top' : '20px',

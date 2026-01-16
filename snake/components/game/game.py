@@ -10,9 +10,5 @@ def game() -> rx.Component:
         rx.box(
             start(),
             style=canvas_style
-        ),
-        rx.text(
-            'Arrow keys / WASD to move · Space to pause · R to restart',
-            style=instructions_style
-        ),
+        )
     )

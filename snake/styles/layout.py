@@ -20,7 +20,7 @@ header_style = {
 
 content_style = {
     **MAIN_COLUMNS_GRID,
-    'padding-left' : '6.12vw',
+    'padding-left' : '5.5vw',
 }
 
 mid_header_style = {

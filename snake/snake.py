@@ -18,6 +18,9 @@ from snake.components.sidebars.left_sidebar import left_sidebar
 from snake.components.sidebars.right_sidebar import right_sidebar
 from snake.components.game.game import game
 
+# Bottom page component
+from snake.components.game.instructions import instructions
+
 
 def index() -> rx.Component:
 
@@ -44,6 +47,9 @@ def index() -> rx.Component:
             right_sidebar(),
             style=content_style
         ),
+
+        # Instructions
+        instructions(),
 
         style=base_style
     )

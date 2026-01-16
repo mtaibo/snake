@@ -4,8 +4,8 @@ from reflex.event import KeyInputInfo
 class State(rx.State):
 
     ## * Variables de estado para la UI
-    left_open = True  
-    right_open = True
+    left_open = False  
+    right_open = False
     game_status = 'stopped'
 
     ## * Toggles para los diferentes estados de la UI
