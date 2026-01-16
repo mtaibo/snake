@@ -2,6 +2,7 @@ import reflex as rx
 from snake.state import State
 
 from snake.styles.components.buttons import start_style
+
 from snake.styles.typography import SOFT_TEXT
 from snake.styles.mixins import FLEX_CENTER
 from snake.styles.measures import BUTTON_ICONS
@@ -18,7 +19,7 @@ def start() -> rx.Component:
             rx.text(
                 'Click/Space to start',
                 style=SOFT_TEXT
-            ),
+            )
         ),
 
         # Action that this button triggers

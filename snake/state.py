@@ -20,6 +20,7 @@ class State(rx.State):
 
     def start(self):
         self.game_status = 'playing'
+        return rx.call_script('initGame("game-canvas")')
 
     def pause_resume(self):
         if self.game_status == 'playing':
@@ -45,3 +46,8 @@ class State(rx.State):
 
             if key.lower() == 'r':
                 self.game_status = 'stopped'
+
+
+class GameState(rx.State):
+
+    running: bool = False
