@@ -1,11 +1,19 @@
-
 window.initGame = function(canvasId) {
-    console.log("Intentando inicializar:", canvasId);
-    const canvas = document.getElementById(canvasId);
-    
-    if (canvas) {
-        console.log("¡Canvas encontrado con éxito!");
-    } else {
-        console.error("No se encontró el canvas con id:", canvasId);
-    }
+    requestAnimationFrame(() => {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+
+        const rect = canvas.getBoundingClientRect();
+        
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        console.log(`Canvas ajustado a: ${canvas.width} x ${canvas.height}`);
+        
+        const tileSize = 20; 
+        const columnas = Math.floor(canvas.width / tileSize);
+        const filas = Math.floor(canvas.height / tileSize);
+        
+        console.log(`Tablero de ${columnas}x${filas}`);
+    });
 }

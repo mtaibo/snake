@@ -6,6 +6,7 @@ from snake.styles.colors import *
 canvas_style = {
     'background-color' : PRIMARY,
 
+    'width' : '34vw',
     'height' : '60.3vh',
     'border-radius' : CONTENT_BORDER_RADIUS,
     'box-shadow' : DEFAULT_SHADOW,
