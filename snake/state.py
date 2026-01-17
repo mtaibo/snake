@@ -39,6 +39,16 @@ class State(rx.State):
 
     def on_key_down(self, key: str, info: KeyInputInfo):
             # Ejemplo: pausar con Space, reset con R
+            if key == 'ArrowUp' or key == 'W' or key == 'w':
+                return rx.call_script("changeDirection('UP')")
+            if key == 'ArrowDown' or key == 'S' or key == 's':
+                return rx.call_script('changeDirection("DOWN")')
+            if key == 'ArrowRight' or key == 'D' or key == 'd':
+                return rx.call_script('changeDirection("RIGHT")')
+            if key == 'ArrowLeft' or key == 'A' or key == 'a':
+                return rx.call_script('changeDirection("LEFT")')
+
+
             if key == " ":
                 if self.game_status == 'playing':
                     self.game_status = 'paused'
