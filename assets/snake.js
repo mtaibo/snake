@@ -1,19 +1,36 @@
+
+// Variables for time on GameLoop
+const FPS = 10;
+let lastTime = 0;
+
 window.initGame = function(canvasId) {
     requestAnimationFrame(() => {
         const canvas = document.getElementById(canvasId);
         if (!canvas) return;
 
-        const rect = canvas.getBoundingClientRect();
-        
-        canvas.width = rect.width;
-        canvas.height = rect.height;
+        // Get measures of canvas, and columns/rows of the grid
+        canvas.width = canvas.getBoundingClientRect().width;
+        canvas.height = canvas.getBoundingClientRect().height;
 
-        console.log(`Canvas ajustado a: ${canvas.width} x ${canvas.height}`);
+        const blockSize = 20; 
+        const columns = Math.floor(canvas.width / blockSize);
+        const rows = Math.floor(canvas.height / blockSize);
         
-        const tileSize = 20; 
-        const columnas = Math.floor(canvas.width / tileSize);
-        const filas = Math.floor(canvas.height / tileSize);
-        
-        console.log(`Tablero de ${columnas}x${filas}`);
+        requestAnimationFrame(gameLoop);
     });
+}
+
+function gameLoop() {
+    update();
+    drawCanvas();
+
+    requestAnimationFrame(gameLoop);
+}
+
+function update() {
+    console.log(`Update`);
+}
+
+function drawCanvas() {
+    console.log(`Draw`);
 }
