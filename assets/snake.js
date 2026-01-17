@@ -35,16 +35,17 @@ window.initGame = function(canvasId) {
     });
 }
 
+// Function to control the game loop
 function gameLoop(currentTime) {
 
-    if (gameStatus === 'stopped') return;
-
-    requestAnimationFrame(gameLoop);
-
-    if (gameStatus === 'paused') {
+    // Check gameStatus to redirect the gameLoop
+    if (gameStatus === 'stopped') { return;
+    } else if (gameStatus === 'paused') {
+        requestAnimationFrame(gameLoop);
         lastTime = currentTime;
         return;
-    }
+    } else requestAnimationFrame(gameLoop);
+
 
     const deltaTime = currentTime - lastTime;
     const interval = 1000 / FPS; 
