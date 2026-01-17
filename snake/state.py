@@ -20,16 +20,19 @@ class State(rx.State):
 
     def start(self):
         self.game_status = 'playing'
-        return rx.call_script('initGame("game-canvas")')
+        return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
 
     def pause_resume(self):
         if self.game_status == 'playing':
             self.game_status = 'paused'
+            return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
         elif self.game_status == 'paused':
             self.game_status = 'playing'
+            return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
 
     def stop(self):
         self.game_status = 'stopped'
+        return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
 
 
     ## ! KEY DOWN HANDLER
@@ -39,15 +42,14 @@ class State(rx.State):
             if key == " ":
                 if self.game_status == 'playing':
                     self.game_status = 'paused'
+                    return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
                 elif self.game_status == 'paused':
                     self.game_status = 'playing'
+                    return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
                 elif self.game_status == 'stopped':
                     self.game_status = 'playing'
+                    return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
 
             if key.lower() == 'r':
                 self.game_status = 'stopped'
-
-
-class GameState(rx.State):
-
-    running: bool = False
+                return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')

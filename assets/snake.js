@@ -3,8 +3,22 @@
 const FPS = 10;
 let lastTime = 0;
 
+// Variables for the GameState
+let gameStatus = 'stopped';
+
+// Function to control the game state
+window.setGameStatus = function(newStatus, canvasId) {
+
+    gameStatus = newStatus;
+
+    if (newStatus === 'playing') {
+        initGame(canvasId);
+    }
+}
+
+// Function to initialize the game
 window.initGame = function(canvasId) {
-    requestAnimationFrame(() => {
+    requestAnimationFrame((timestamp) => {
         const canvas = document.getElementById(canvasId);
         if (!canvas) return;
 
@@ -16,21 +30,39 @@ window.initGame = function(canvasId) {
         const columns = Math.floor(canvas.width / blockSize);
         const rows = Math.floor(canvas.height / blockSize);
         
+        lastTime = timestamp;
         requestAnimationFrame(gameLoop);
     });
 }
 
-function gameLoop() {
-    update();
-    drawCanvas();
+function gameLoop(currentTime) {
+
+    if (gameStatus === 'stopped') return;
 
     requestAnimationFrame(gameLoop);
+
+    if (gameStatus === 'paused') {
+        lastTime = currentTime;
+        return;
+    }
+
+    const deltaTime = currentTime - lastTime;
+    const interval = 1000 / FPS; 
+
+    if (deltaTime > interval) {
+
+        lastTime = currentTime - (deltaTime % interval);
+
+        update();
+        drawCanvas();
+    }
 }
 
 function update() {
-    console.log(`Update`);
+    console.log('Update');
+    return;
 }
 
 function drawCanvas() {
-    console.log(`Draw`);
+    return;
 }
