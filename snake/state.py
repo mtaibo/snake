@@ -38,17 +38,8 @@ class State(rx.State):
     ## ! KEY DOWN HANDLER
 
     def on_key_down(self, key: str, info: KeyInputInfo):
-            # Ejemplo: pausar con Space, reset con R
-            if key == 'ArrowUp' or key == 'W' or key == 'w':
-                return rx.call_script("changeDirection('UP')")
-            if key == 'ArrowDown' or key == 'S' or key == 's':
-                return rx.call_script('changeDirection("DOWN")')
-            if key == 'ArrowRight' or key == 'D' or key == 'd':
-                return rx.call_script('changeDirection("RIGHT")')
-            if key == 'ArrowLeft' or key == 'A' or key == 'a':
-                return rx.call_script('changeDirection("LEFT")')
-
-
+            
+            # Play/Pause key
             if key == " ":
                 if self.game_status == 'playing':
                     self.game_status = 'paused'
@@ -60,6 +51,17 @@ class State(rx.State):
                     self.game_status = 'playing'
                     return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
 
-            if key.lower() == 'r':
+            # Restart key
+            if key.upper() == 'R':
                 self.game_status = 'stopped'
                 return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
+
+            # Movement keys
+            if key == 'ArrowUp' or key.upper() == 'W':
+                return rx.call_script('changeDirection("UP")')
+            elif key == 'ArrowDown' or key.upper() == 'S':
+                return rx.call_script('changeDirection("DOWN")')
+            elif key == 'ArrowRight' or key.upper() == 'D':
+                return rx.call_script('changeDirection("RIGHT")')
+            elif key == 'ArrowLeft' or key.upper() == 'A':
+                return rx.call_script('changeDirection("LEFT")')

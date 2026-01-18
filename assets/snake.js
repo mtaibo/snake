@@ -104,7 +104,7 @@ function drawCanvas() {
     const ctx = canvas.getContext("2d");
 
     // Limpiar el canvas
-    ctx.fillStyle = "black";
+    ctx.fillStyle = '#2e2e2e';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Dibujar serpiente
