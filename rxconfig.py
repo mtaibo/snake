@@ -12,5 +12,5 @@ head = [
     rx.el.link(rel='icon', type='image/png', sizes='32x32', href='/favicon/favicon.png?v=1'),
     rx.el.link(rel='apple-touch-icon', sizes='180x180', href='/favicon/apple-touch-icon.png?v=1'),
     rx.el.link(rel='icon', href='/favicon/favicon.ico?v=1'),
-    rx.el.script(src='/snake.js', defer=True)
+    rx.el.script(src='/game/main.js', defer=True)
 ]
