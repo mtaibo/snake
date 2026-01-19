@@ -1,5 +1,5 @@
 import reflex as rx
-from snake.state import State
+from snake.state import State, GameStatus
 
 from snake.styles.components.buttons import start_style
 
@@ -30,7 +30,7 @@ def start() -> rx.Component:
         style={
             **start_style, 
             'display': rx.cond(
-                State.game_status == 'stopped',
+                State.game_status == GameStatus.STOPPED,
                 'flex', 
                 'none'
             )            

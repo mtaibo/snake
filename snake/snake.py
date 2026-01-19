@@ -1,8 +1,8 @@
 import reflex as rx
 from rxconfig import *
-from snake.state import State    
 
-# Key listeners
+# Key listener
+from snake.state import State    
 from reflex_global_hotkey import global_hotkey_watcher
 
 # Layout styles
