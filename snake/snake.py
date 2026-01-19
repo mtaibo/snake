@@ -48,7 +48,7 @@ def index() -> rx.Component:
             style=content_style
         ),
 
-        # Instructions
+        # Bottom
         instructions(),
 
         style=base_style
