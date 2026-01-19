@@ -41,7 +41,7 @@ class State(rx.State):
     
     # Internal function to syncronize game_status on PY to gameStatus on JS
     def _sync_js_status(self):
-        return rx.call_script(f'setGameStatus("{self.game_status}", "game-canvas")')
+        return rx.call_script(f'setGameStatus("{self.game_status.value}", "game-canvas")')
 
     ## FUNCTION GROUP TO CHANGE GAME_STATUS
 
