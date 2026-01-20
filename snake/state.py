@@ -8,6 +8,12 @@ class GameStatus(str, enum.Enum):
     PLAYING = 'playing'
     PAUSED = 'paused'
 
+class Direction(str, enum.Enum):
+    UP = 'UP'
+    DOWN = 'DOWN'
+    LEFT = 'LEFT'
+    RIGHT = 'RIGHT'
+
 # Main app state object
 class State(rx.State):
 
@@ -21,8 +27,8 @@ class State(rx.State):
     # Key handler function
     def on_key_down(self, key: str, info: KeyInputInfo):
             
-            if key == ' ': self.pause_resume() # Play/Pause key
-            if key.upper() == 'R': self.stop() # Restart key
+            if key == ' ': return self.pause_resume() # Play/Pause key
+            if key.upper() == 'R': return self.stop() # Restart key
 
             # Movement keys
             if key == 'ArrowUp' or key.upper() == 'W':
@@ -56,5 +62,4 @@ class State(rx.State):
     def pause_resume(self):
         if self.game_status == GameStatus.PLAYING: self.game_status = GameStatus.PAUSED
         elif self.game_status == GameStatus.PAUSED: self.game_status = GameStatus.PLAYING
-        elif self.game_status == GameStatus.STOPPED: self.game_status = GameStatus.PLAYING
         return self._sync_js_status()
