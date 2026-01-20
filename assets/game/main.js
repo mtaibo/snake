@@ -1,16 +1,21 @@
+/**
+ * Este archivo se encargará única y exclusivamente
+ * de interconectar todas las funciones del programa. 
+ * Albergará el loop principal de juego, además de 
+ * las llamadas al setup. 
+ */
+
+
+import * as Constants from './constants.js'
 
 // Variables for time on GameLoop
-const FPS = 10;
-const interval = 1000 / FPS; 
+const interval = 1000 / Constants.FPS; 
 let lastTime = 0;
-
-// Variables for the GameState
-let gameStatus = 'stopped';
 
 // Variables de configuración y control
 let canvas, ctx;
 let columns, rows;
-const blockSize = 20;
+const blockSize = Constants.BlockSize;
 
 let snake = [{x: 10, y: 10}]; // La cabeza empieza aquí
 let direction = {x: 1, y: 0}; // Se mueve a la derecha inicialmente
@@ -19,7 +24,7 @@ let food = {x: 5, y: 5};
 // Function to control the game state
 window.setGameStatus = function(newStatus, canvasId) {
     gameStatus = newStatus;
-    if (newStatus === 'playing') initGame(canvasId);
+    if (newStatus === Constants.GameStatus.PLAYING) initGame(canvasId);
 }
 
 // Function to initialize the game
@@ -42,18 +47,18 @@ window.initGame = function(canvasId) {
 
 window.changeDirection = function(newDir) {
     // Evitar que la serpiente se gire 180 grados sobre sí misma
-    if (newDir === 'UP' && direction.y !== 1) direction = {x: 0, y: -1};
-    if (newDir === 'DOWN' && direction.y !== -1) direction = {x: 0, y: 1};
-    if (newDir === 'LEFT' && direction.x !== 1) direction = {x: -1, y: 0};
-    if (newDir === 'RIGHT' && direction.x !== -1) direction = {x: 1, y: 0};
+    if (newDir ===  Constants.Direction.UP && direction.y !== 1) direction = {x: 0, y: -1};
+    if (newDir === Constants.Direction.DOWN && direction.y !== -1) direction = {x: 0, y: 1};
+    if (newDir === Constants.Direction.LEFT && direction.x !== 1) direction = {x: -1, y: 0};
+    if (newDir === Constants.Direction.RIGHT && direction.x !== -1) direction = {x: 1, y: 0};
 }
 
 // Function to control the game loop
 function gameLoop(currentTime) {
 
     // Check gameStatus to redirect the gameLoop
-    if (gameStatus === 'stopped') { return;
-    } else if (gameStatus === 'paused') {
+    if (gameStatus === Constants.GameStatus.STOPPED) { return;
+    } else if (gameStatus === Constants.GameStatus.PAUSED) {
         requestAnimationFrame(gameLoop);
         lastTime = currentTime;
         return;
@@ -94,7 +99,7 @@ function update() {
     // 4. Comprobar colisiones (Paredes)
     // Asumiendo que sabes las columnas y filas de tu canvas
     if (head.x < 0 || head.x >= columns || head.y < 0 || head.y >= rows) {
-        gameStatus = 'stopped';
+        gameStatus = Constants.GameStatus.STOPPED;
         alert("Game Over");
     }
 }
