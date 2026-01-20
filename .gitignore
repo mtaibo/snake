@@ -5,3 +5,4 @@ assets/external/
 .web
 *.py[cod]
 venv/
+snake.code-workspace
