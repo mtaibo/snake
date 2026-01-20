@@ -16,14 +16,19 @@ def start() -> rx.Component:
                 rx.text('START'),
                 style=FLEX_CENTER
             ),
-            rx.text(
-                'Click/Space to start',
-                style=SOFT_TEXT
+            rx.center(
+                'Click to start',
+                style = {
+                    **SOFT_TEXT,
+                    **FLEX_CENTER,
+                    'width' : '100%'
+                }
             )
         ),
 
         # Action that this button triggers
         on_click=State.start,
+        auto_focus=True,
 
         # This style contains the pause_style and adds a rx.cond 
         # to show this button only for game_status 'playing'
@@ -33,6 +38,6 @@ def start() -> rx.Component:
                 State.game_status == GameStatus.STOPPED,
                 'flex', 
                 'none'
-            )            
+            )
         }
     )

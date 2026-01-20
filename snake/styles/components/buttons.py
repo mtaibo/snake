@@ -29,4 +29,8 @@ start_style = {
     '_hover' : {
         'cursor' : 'pointer',
     },
+
+    '_focus': {
+        'outline': 'none', 
+    },      
 }
