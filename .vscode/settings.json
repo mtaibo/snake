@@ -19,5 +19,6 @@
     "**/venv": true,
     "**/requirements.txt": true,
     "**/.vscode": true,
-  }
+  },
+  "editor.fontFamily": "Hack Nerd Font"
 }
