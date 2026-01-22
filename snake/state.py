@@ -31,14 +31,15 @@ class State(rx.State):
             if key.upper() == 'R': return self.stop() # Restart key
 
             # Movement keys
-            if key == 'ArrowUp' or key.upper() == 'W':
-                return rx.call_script('changeDirection("UP")')
-            elif key == 'ArrowDown' or key.upper() == 'S':
-                return rx.call_script('changeDirection("DOWN")')
-            elif key == 'ArrowRight' or key.upper() == 'D':
-                return rx.call_script('changeDirection("RIGHT")')
-            elif key == 'ArrowLeft' or key.upper() == 'A':
-                return rx.call_script('changeDirection("LEFT")')
+            if self.game_status == GameStatus.PLAYING:
+                if key == 'ArrowUp' or key.upper() == 'W':
+                    return rx.call_script('changeDirection("UP")')
+                elif key == 'ArrowDown' or key.upper() == 'S':
+                    return rx.call_script('changeDirection("DOWN")')
+                elif key == 'ArrowRight' or key.upper() == 'D':
+                    return rx.call_script('changeDirection("RIGHT")')
+                elif key == 'ArrowLeft' or key.upper() == 'A':
+                    return rx.call_script('changeDirection("LEFT")')
 
     # Function to open or close sidebars
     def toggle_sidebar(self, side: str):
